@@ -1,0 +1,47 @@
+services:
+
+  nameserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.nameserver
+    container_name: corba_nameserver
+    ports:
+      - "1050:1050"
+    networks:
+      - corba_net
+    healthcheck:
+      test: ["CMD-SHELL", "sleep 3 && exit 0"]
+      interval: 8s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+
+  serveurpdf:
+    build:
+      context: .
+      dockerfile: Dockerfile.serveurpdf
+    container_name: corba_serveurpdf
+    depends_on:
+      nameserver:
+        condition: service_healthy
+    networks:
+      - corba_net
+
+  serveurhttp:
+    build:
+      context: .
+      dockerfile: Dockerfile.serveurhttp
+    container_name: corba_serveurhttp
+    depends_on:
+      nameserver:
+        condition: service_healthy
+      serveurpdf:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    networks:
+      - corba_net
+
+networks:
+  corba_net:
+    driver: bridge

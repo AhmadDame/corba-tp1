@@ -1,0 +1,5 @@
+# Dans les 3 fichiers, remplace la première ligne
+FROM openjdk:8-jdk/FROM eclipse-temurin:8-jdk/' Dockerfile.nameserver Dockerfile.serveurpdf Dockerfile.serveurhttp
+
+# tnameserv est inclus dans le JDK 8
+CMD ["/usr/local/openjdk-8/bin/tnameserv", "-ORBInitialPort", "1050"]

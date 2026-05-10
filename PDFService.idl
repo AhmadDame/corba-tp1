@@ -1,0 +1,12 @@
+module PDFModule {
+    typedef sequence<octet> PDFData;
+    interface PDFService {
+        PDFData fusionner(in PDFData pdf1, in PDFData pdf2);
+        PDFData decouper(in PDFData pdf, in long pageDebut, in long pageFin);
+        PDFData supprimerPage(in PDFData pdf, in long numeroPage);
+        PDFData ajouterMotDePasse(in PDFData pdf, in string password);
+        PDFData convertirEnImage(in PDFData pdf, in long numeroPage);
+        string extraireTexte(in PDFData pdf);
+        PDFData creerPDF(in string contenu);
+    };
+};

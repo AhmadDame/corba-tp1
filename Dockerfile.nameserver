@@ -1,0 +1,2 @@
+FROM eclipse-temurin:8-jdk
+CMD ["/opt/java/openjdk/bin/tnameserv", "-ORBInitialPort", "1050"]

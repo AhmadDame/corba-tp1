@@ -1,0 +1,8 @@
+FROM eclipse-temurin:8-jdk
+WORKDIR /app
+COPY pdfbox-2.0.30.jar .
+COPY fontbox-2.0.30.jar .
+COPY commons-logging-1.2.jar .
+COPY PDFModule/ ./PDFModule/
+COPY *.class .
+CMD ["/opt/java/openjdk/bin/java", "-cp", ".:pdfbox-2.0.30.jar:fontbox-2.0.30.jar:commons-logging-1.2.jar", "ServeurPDF", "-ORBInitialPort", "1050", "-ORBInitialHost", "nameserver"]
